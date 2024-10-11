@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles pour la fenêtre modale */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">≡</div>
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">SHOP</a></li>
+                <li><a href="#">MAGAZINE</a></li>
+            </ul>
+        </nav>
+        <div class="cart-login">
+            <a href="#" class="cart-icon">🛒</a>
+            <a href="#" class="login-link">LOGIN</a>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search cars...">
+            <span class="powered-by">Powered by Linnix</span>
+        </div>
+        <select class="sort-dropdown">
+            <option>Best match</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest</option>
+        </select>
+    </div>
+
+    <div class="main-content">
+        <div class="filters">
+            <div class="filter-section">
+                <h3 class="filter-title">Collection</h3>
+                <div class="filter-options">
+                    <select>
+                        <option>All Collections</option>
+                        <option>Luxury</option>
+                        <option>Performance</option>
+                        <option>Classic</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3 class="filter-title">Color</h3>
+                <div class="filter-options">
+                    <select>
+                        <option>All Colors</option>
+                        <option>Black</option>
+                        <option>White</option>
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Silver</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3 class="filter-title">Category</h3>
+                <div class="filter-options">
+                    <select id="category-filter">
+                        <option value="all-categories">All Categories</option>
+                        <option value="sport">Sport</option>
+                        <option value="super-sport">Super Sport</option>
+                        <option value="extra-luxe">Extra Luxe</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3 class="filter-title">Price Range</h3>
+                <div class="filter-options">
+                    <input type="range" min="0" max="2000000" class="price-slider">
+                    <div class="price-range">
+                        <span>$0</span>
+                        <span>$2,000,000+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card super-sport">
+                <img src="misc/lambo1.jpeg" alt="Lamborghini" class="product-image">
+                <div class="product-details">
+                    <div class="product-info">
+                        <h3 class="product-name">Lamborghini</h3>
+                        <p class="product-category">Super Sport</p>
+                        <p class="product-price">$224,999</p>
+                        <div class="product-rating">★★★★☆</div>
+                    </div>
+                    <button class="add-to-cart">🛒</button>
+                </div>
+            </div>
+            <div class="product-card extra-luxe">
+                <img src="misc/rolls.jpeg" alt="Rolls-Royce" class="product-image">
+                <div class="product-details">
+                    <div class="product-info">
+                        <h3 class="product-name">Rolls-Royce</h3>
+                        <p class="product-category">Extra Luxe</p>
+                        <p class="product-price">$1,000,000</p>
+                        <div class="product-rating">★★★★★</div>
+                    </div>
+                    <button class="add-to-cart">🛒</button>
+                </div>
+            </div>
+            <div class="product-card sport">
+                <img src="misc/bmw.jpeg" alt="BMW" class="product-image">
+                <div class="product-details">
+                    <div class="product-info">
+                        <h3 class="product-name">BMW</h3>
+                        <p class="product-category">Sport</p>
+                        <p class="product-price">$94,500</p>
+                        <div class="product-rating">★★★★☆</div>
+                    </div>
+                    <button class="add-to-cart">🛒</button>
+                </div>
+            </div>
+            <div class="product-card super-sport">
+                <img src="misc/mercedes.jpeg" alt="Mercedes" class="product-image">
+                <div class="product-details">
+                    <div class="product-info">
+                        <h3 class="product-name">Mercedes</h3>
+                        <p class="product-category">Super Sport</p>
+                        <p class="product-price">$170,000</p>
+                        <div class="product-rating">★★★★☆</div>
+                    </div>
+                    <button class="add-to-cart">🛒</button>
+                </div>
+            </div>
+            <div class="product-card sport">
+                <img src="misc/porshe.jpeg" alt="Porsche" class="product-image">
+                <div class="product-details">
+                    <div class="product-info">
+                        <h3 class="product-name">Porsche</h3>
+                        <p class="product-category">Sport</p>
+                        <p class="product-price">$120,000</p>
+                        <div class="product-rating">★★★★★</div>
+                    </div>
+                    <button class="add-to-cart">🛒</button>
+                </div>
+            </div>
+            <div class="product-card sport">
+                <img src="misc/alpine.jpeg" alt="Alpine" class="product-image">
+                <div class="product-details">
+                    <div class="product-info">
+                        <h3 class="product-name">Alpine</h3>
+                        <p class="product-category">Sport</p>
+                        <p class="product-price">$80,000</p>
+                        <div class="product-rating">★★★★☆</div>
+                    </div>
+                    <button class="add-to-cart">🛒</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <span class="page-number active">1</span>
+        <span class="page-number">2</span>
+        <span class="page-number">3</span>
+        <span class="page-number">4</span>
+        <span class="page-number">5</span>
+        <span class="page-number">6</span>
+        <span class="page-number">7</span>
+        <span class="page-number">8</span>
+        <span class="page-number">9</span>
+        <span class="page-number">10</span>
+        <span class="page-number">&gt;</span>
+    </div>
+
+    <footer>
+        <p class="copyright">&copy; 2024 Your Car Shop. All rights reserved.</p>
+    </footer>
+
+    <!-- Ajout de la fenêtre modale pour l'agrandissement des images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categorySelect = document.getElementById('category-filter');
+        const productCards = document.querySelectorAll('.product-card');
+
+        console.log('Category select:', categorySelect);
+        console.log('Product cards:', productCards);
+
+        if (categorySelect) {
+            categorySelect.addEventListener('change', function() {
+                const selectedCategory = this.value;
+                console.log('Selected category:', selectedCategory);
+
+                productCards.forEach(card => {
+                    console.log('Card classes:', card.className);
+                    if (selectedCategory === 'all-categories') {
+                        card.style.display = 'block';
+                    } else {
+                        if (card.classList.contains(selectedCategory)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        } else {
+            console.error('Category filter select not found');
+        }
+
+       
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const productImages = document.querySelectorAll('.product-image');
+
+        productImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+    </script>
+</body>
+</html>
